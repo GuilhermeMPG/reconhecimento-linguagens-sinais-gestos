@@ -2,6 +2,7 @@ import csv
 import copy
 from collections import Counter
 from collections import deque
+import itertools
 from typing import List, Mapping, Optional, Tuple, Union
 import pandas as pd
 import cv2 as cv
@@ -105,6 +106,9 @@ def main():
                     draw.get_default_hand_landmarks_style(),
                     draw.get_default_hand_connections_style()
                 )
+                imagem_debug = desenhar_retangulo_borda(
+                    usar_borda, imagem_debug, retangulo, mao_dominante,
+                    rotulos_gestos[gesto_comum[0][0]],  modo, numero)
 
         else:
             for i in range(len(historico_pontos)):
@@ -133,7 +137,7 @@ def selecionar_modo(tecla, modo):
             modo = 2
         case 44:  # Vírgula
             modo = 1
-
+    
     return numero, modo
 
 
@@ -200,7 +204,7 @@ def processar_historico_pontos(imagem, historico_pontos, modo):
     historico_pontos_processados = []
 
     for lista_pontos in historico_pontos:
-        nova_lista_pontos = [ponto[:] for ponto in lista_pontos]
+        nova_lista_pontos = copy.deepcopy(lista_pontos)
 
         base_x, base_y = 0, 0
         for i, ponto in enumerate(nova_lista_pontos):
@@ -216,8 +220,8 @@ def processar_historico_pontos(imagem, historico_pontos, modo):
                 nova_lista_pontos[i][1] = 0
         
         # Achata a lista de pontos
-        lista_achatada = sum(nova_lista_pontos, [])
-        historico_pontos_processados.append(lista_achatada)
+        nova_lista_pontos = list(itertools.chain.from_iterable(nova_lista_pontos))
+        historico_pontos_processados.append(nova_lista_pontos)
 
     # Concatenando todos os valores em um único array
     array_concatenado = np.concatenate(historico_pontos_processados)   
@@ -226,50 +230,60 @@ def processar_historico_pontos(imagem, historico_pontos, modo):
 
 
 
-def processamento_combinado(imagem, historico_pontos, modo):
-    # Processa os pontos
-    pontos_processados = pre_processar_pontos(historico_pontos)
-    
-    # Processa o histórico dos pontos
-    historico_processado = processar_historico_pontos(imagem, historico_pontos, modo)
-    
-    # Alterna os valores entre os resultados das duas funções
-    resultado_combinado = []
-    comprimento_minimo = min(len(pontos_processados), len(historico_processado)) // 2
+def processamento_combinado(image, point_history, mode , debug=False):
+    # Processa as landmarks
+    landmark_process = pre_processar_pontos(point_history)
 
-    j = len(historico_pontos)
+    # Processa o histórico dos pontos
+    point_history_process = processar_historico_pontos(image, point_history, mode)
+
+    #Alterna os valores entre os resultados das duas funções
+    combined_result = []
+    min_length = min(len(landmark_process), len(point_history_process)) // 2
+    
+    j = len(point_history)
     cont = 1
-    conti = 0
+    conti=0
     h = 0
     c = 0
 
-    for i in range(comprimento_minimo):
+    
+    for i in range(min_length):
         if cont == j:
             c += 1
             h = c
             cont = 1
 
         if cont == 1:
-            resultado_combinado.append(pontos_processados[i])
-            resultado_combinado.append(pontos_processados[i+1])
-            if h < len(historico_processado):
-                resultado_combinado.append(historico_processado[h])
-            if h + 1 < len(historico_processado):
-                resultado_combinado.append(historico_processado[h+1])
-            c += 1
+            combined_result.append(landmark_process[i])
+  
+            combined_result.append(landmark_process[i+1])
+
+            if h < len(point_history_process):
+                combined_result.append(point_history_process[h])
+
+            if h + 1 < len(point_history_process):
+                combined_result.append(point_history_process[h+1])
+
+            c+=1
         else:
-            h += j * 2
-            resultado_combinado.append(pontos_processados[i+conti])
-            resultado_combinado.append(pontos_processados[i+conti+1])
-            if h < len(historico_processado):
-                resultado_combinado.append(historico_processado[h])
-            if h + 1 < len(historico_processado):
-                resultado_combinado.append(historico_processado[h+1])
+            h += j*2
+            combined_result.append(landmark_process[i+conti])
 
+            combined_result.append(landmark_process[i+conti+1])
+
+            if h < len(point_history_process):
+                combined_result.append(point_history_process[h])
+
+            if h + 1 < len(point_history_process):
+                combined_result.append(point_history_process[h+1])
+
+        
         cont += 1
-        conti += 1
+        conti +=1
 
-    return np.array(resultado_combinado)
+    
+    return np.array(combined_result)
 
 
 def gravar_csv(numero, modo, lista_gestos):
@@ -279,9 +293,9 @@ def gravar_csv(numero, modo, lista_gestos):
         caminho_csv = 'model/gesture_sign_classifier/gesture_sign_history.csv'
         # Abre o arquivo CSV no modo de adição
         with open(caminho_csv, 'a', newline="") as arquivo:
-            escritor = csv.writer(arquivo)
+            escrita = csv.writer(arquivo)
             # Escreve a linha de dados no arquivo CSV
-            escritor.writerow([numero] + lista_gestos)
+            escrita.writerow([numero , *lista_gestos])
     return
 
 
@@ -358,7 +372,39 @@ def calcula_retangulo_delimitador(pontos_landmarks):
     return [x_min, y_min, x_max, y_max]
 
 
+def desenhar_retangulo_borda(usando_borda, imagem, borda, mao_dominante, texto_gesto_mao, modo, numero):
+    if usando_borda:
+        # Desenha um retângulo ao redor da mão
+        cv.rectangle(imagem, (borda[0], borda[1]), (borda[2], borda[3]), (0, 0, 0), 1)
+        # Desenha um retângulo para exibir informações
+        cv.rectangle(imagem, (borda[0], borda[1]), (borda[2], borda[1] - 22), (0, 0, 0), -1)
+        # Exibe a mão dominante (esquerda ou direita)
+        texto_info = mao_dominante.classification[0].label
+        cv.putText(imagem, texto_info, (borda[0] + 5, borda[1] - 4),
+                   cv.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1, cv.LINE_AA)
 
+    # Exibe o texto do gesto da mão se houver
+    if texto_gesto_mao:
+        cv.putText(imagem, "Gesto da Mao:" + texto_gesto_mao, (10, 60),
+                   cv.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 0), 4, cv.LINE_AA)
+        cv.putText(imagem, "Gesto da Mao:" + texto_gesto_mao, (10, 60),
+                   cv.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), 2, cv.LINE_AA)    
+
+
+    # Exibe o modo atual
+    modos = ['Registrando Historico de Gestos', 'Historico de Gestos Estáticos']
+    if modo in [1, 2]:
+        cv.putText(imagem, "MODO:" + modos[modo - 1], (10, 90),
+                   cv.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1, cv.LINE_AA)
+        # Exibe a tecla pressionada (0-9 ou a-z)
+        if 0 <= numero <= 9:  # De 0 a 9
+            cv.putText(imagem, "TECLA PRESSIONADA:" + str(numero), (10, 110),
+                       cv.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1, cv.LINE_AA)
+        elif 10 <= numero <= 35:  # De 'a' a 'z'
+            cv.putText(imagem, "TECLA PRESSIONADA:" + chr(numero + 87), (10, 110),
+                       cv.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1, cv.LINE_AA)
+    
+    return imagem
 
 
 
