@@ -51,9 +51,11 @@ Este projeto utiliza o MediaPipe para detectar e classificar gestos das mãos em
 
 ## Estrutura do Projeto
 
-- `app.py`: Script principal que executa o sistema de reconhecimento de gestos.
-- `model/`: Diretório contendo o modelo e os arquivos relacionados à classificação de gestos.
-- `draw.py`: Script para desenhar os pontos de referência e conexões nas imagens.
+- `app.py`: Script principal responsável por executar o sistema de reconhecimento de gestos em tempo real e a gravação de dados.
+- `model/`: Diretório contendo o modelo e arquivos relacionados à classificação de gestos.
+  - `model/gesture_sign_classifier.py`: Código que executa o reconhecimento em tempo real utilizando o modelo de classificação de gestos.
+- `draw.py`: Script para desenhar os pontos de referência e conexões nas imagens capturadas.
+- `creatData.py`: Código responsável por gerar os dados no arquivo .csv a partir das imagens capturadas.
 
 ## Como Executar
 
