@@ -38,7 +38,7 @@ Este projeto utiliza o MediaPipe para detectar e classificar gestos das mãos em
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   git clone https://github.com/GuilhermeMPG/reconhecimento-linguagens-sinais-gestos.git
    ```
 2. Navegue até o diretório do projeto:
    ```bash
