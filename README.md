@@ -38,7 +38,7 @@ Este projeto utiliza o MediaPipe para detectar e classificar gestos das mãos em
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   git clone https://github.com/GuilhermeMPG/reconhecimento-linguagens-sinais-gestos.git
    ```
 2. Navegue até o diretório do projeto:
    ```bash
@@ -51,9 +51,11 @@ Este projeto utiliza o MediaPipe para detectar e classificar gestos das mãos em
 
 ## Estrutura do Projeto
 
-- `app.py`: Script principal que executa o sistema de reconhecimento de gestos.
-- `model/`: Diretório contendo o modelo e os arquivos relacionados à classificação de gestos.
-- `draw.py`: Script para desenhar os pontos de referência e conexões nas imagens.
+- `app.py`: Script principal responsável por executar o sistema de reconhecimento de gestos em tempo real e a gravação de dados.
+- `model/`: Diretório contendo o modelo e arquivos relacionados à classificação de gestos.
+  - `model/gesture_sign_classifier.py`: Código que executa o reconhecimento em tempo real utilizando o modelo de classificação de gestos.
+- `draw.py`: Script para desenhar os pontos de referência e conexões nas imagens capturadas.
+- `creatData.py`: Código responsável por gerar os dados no arquivo .csv a partir das imagens capturadas.
 
 ## Como Executar
 
@@ -79,8 +81,8 @@ Além disso, as teclas de '0' a '9' e de 'a' a 'z' podem ser usadas para registr
 - **'a' a 'z'**: As teclas alfabéticas de 'a' a 'z' são convertidas para os números de 10 a 35.
 
 ## Data_Base
-Arquivo .csv gerado: [gesture_sign_history.csv](https://drive.google.com/file/d/1IsoZwXI1gz-sfuxFUAJP15IWeVUBybhv/view?usp=sharing) 
-Imagens Externas: https://www.kaggle.com/datasets/williansoliveira/libras
+- Arquivo .csv gerado: [gesture_sign_history.csv](https://drive.google.com/file/d/1IsoZwXI1gz-sfuxFUAJP15IWeVUBybhv/view?usp=sharing) 
+- Imagens Externas: https://www.kaggle.com/datasets/williansoliveira/libras
   
 
 ## Funções Principais Do Main
@@ -141,7 +143,9 @@ O código percorre um diretório de imagens, selecionando até 100 arquivos alea
 
 A função main() coordena todo o processo, desde a configuração inicial até a gravação dos resultados, sendo executada quando o script é rodado.
 
-### 
+### Arquivo Jupyter
+
+Este notebook Jupyter serve como um guia passo a passo para a criação de um modelo de reconhecimento de gestos utilizando dados previamente coletados. Ele demonstra o processo completo, desde a preparação dos dados até o treinamento do modelo com Keras e a conversão para o formato TFLite.
 
 
 ## Contribuições
