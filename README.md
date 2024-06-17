@@ -79,8 +79,8 @@ Além disso, as teclas de '0' a '9' e de 'a' a 'z' podem ser usadas para registr
 - **'a' a 'z'**: As teclas alfabéticas de 'a' a 'z' são convertidas para os números de 10 a 35.
 
 ## Data_Base
-Arquivo .csv gerado: [gesture_sign_history.csv](https://drive.google.com/file/d/1IsoZwXI1gz-sfuxFUAJP15IWeVUBybhv/view?usp=sharing) 
-Imagens Externas: https://www.kaggle.com/datasets/williansoliveira/libras
+- Arquivo .csv gerado: [gesture_sign_history.csv](https://drive.google.com/file/d/1IsoZwXI1gz-sfuxFUAJP15IWeVUBybhv/view?usp=sharing) 
+- Imagens Externas: https://www.kaggle.com/datasets/williansoliveira/libras
   
 
 ## Funções Principais Do Main
@@ -141,7 +141,9 @@ O código percorre um diretório de imagens, selecionando até 100 arquivos alea
 
 A função main() coordena todo o processo, desde a configuração inicial até a gravação dos resultados, sendo executada quando o script é rodado.
 
-### 
+### Arquivo Jupyter
+
+Este notebook Jupyter serve como um guia passo a passo para a criação de um modelo de reconhecimento de gestos utilizando dados previamente coletados. Ele demonstra o processo completo, desde a preparação dos dados até o treinamento do modelo com Keras e a conversão para o formato TFLite.
 
 
 ## Contribuições
