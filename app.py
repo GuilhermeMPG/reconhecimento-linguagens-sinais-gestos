@@ -49,7 +49,7 @@ def main():
     historico_pontos = [deque(maxlen=comprimento_historico) for _ in range(hand_marks)]
 
     # Histórico de gestos dos dedos
-    historico_gestos_dedos = deque(maxlen=1)
+    historico_gestos_dedos = deque(maxlen=46)
 
     modo = 0
 
@@ -392,7 +392,7 @@ def desenhar_retangulo_borda(usando_borda, imagem, borda, mao_dominante, texto_g
 
 
     # Exibe o modo atual
-    modos = ['Registrando Historico de Gestos', 'Historico de Gestos Estáticos']
+    modos = ['Gestos em Movimento', 'Gestos Estáticos']
     if modo in [1, 2]:
         cv.putText(imagem, "MODO:" + modos[modo - 1], (10, 90),
                    cv.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1, cv.LINE_AA)
