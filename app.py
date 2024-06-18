@@ -21,7 +21,7 @@ def main():
     altura_camera = 540
 
     usar_borda = True
-
+    video_path = 'data/videos/Video01.mp4'
     # Configuração da câmera
     captura = cv.VideoCapture(camera)
     captura.set(cv.CAP_PROP_FRAME_WIDTH, largura_camera)

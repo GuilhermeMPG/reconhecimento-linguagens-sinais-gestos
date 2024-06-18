@@ -2,18 +2,16 @@ import numpy as np
 import tensorflow as tf
 
 class ClassificarGestos:
-    def __init__(self, caminho_modelo='model/gesture_sign_classifier/gesture_sign_classifier.tflite', 
-                 limiar_confianca=0.8, valor_invalido=0, num_threads=1):
+    def __call__(self, historico_pontos):
+        caminho_modelo='model/gesture_sign_classifier/gesture_sign_classifier.tflite'
         # Inicialização do modelo TFLite
         # Código alterado a partir de: https://www.tensorflow.org/lite/guide/inference?hl=pt-br#load_and_run_a_model_in_python
-        self.interpreter = tf.lite.Interpreter(model_path=caminho_modelo, num_threads=num_threads)
+        self.interpreter = tf.lite.Interpreter(model_path=caminho_modelo, num_threads=1)
         self.interpreter.allocate_tensors()
         self.detalhes_entrada = self.interpreter.get_input_details()
         self.detalhes_saida = self.interpreter.get_output_details()
-        self.limiar_confianca = limiar_confianca
-        self.valor_invalido = valor_invalido
-
-    def __call__(self, historico_pontos):
+        self.limiar_confianca = 0.8
+        self.valor_invalido = 0
         # Definir tensor de entrada
         # Código alterado a partir de: https://stackoverflow.com/questions/50443411/how-to-load-a-tflite-model-in-script
         indice_tensor_entrada = self.detalhes_entrada[0]['index']
