@@ -123,11 +123,14 @@ def main():
 def selecionar_modo(tecla, modo):
     numero = -1
 
-    # Converte teclas de '0' a '9' e de 'a' a 'z'
+    # Converte teclas de '0' a '9', de 'a' a 'z' e 'ç' em 6
     if 48 <= tecla <= 57:  # 0 ~ 9
         numero = tecla - 48
     elif 97 <= tecla <= 122:  # a ~ z
         numero = tecla - 87
+    elif tecla == 231:  # ç
+        numero = 6
+
 
     # Utiliza match-case para alternar modos
     match tecla:
