@@ -16,7 +16,7 @@ import draw
 
 def main():
     # Parâmetros de configuração
-    camera = 0
+    camera = 1
     largura_camera = 960
     altura_camera = 540
 
