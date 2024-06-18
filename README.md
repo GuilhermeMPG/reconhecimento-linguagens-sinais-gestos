@@ -48,15 +48,6 @@ Este projeto utiliza o MediaPipe para detectar e classificar gestos das mãos em
    ```bash
    pip install -r requirements.txt
    ```
-
-## Estrutura do Projeto
-
-- `app.py`: Script principal responsável por executar o sistema de reconhecimento de gestos em tempo real e a gravação de dados.
-- `model/`: Diretório contendo o modelo e arquivos relacionados à classificação de gestos.
-  - `model/gesture_sign_classifier.py`: Código que executa o reconhecimento em tempo real utilizando o modelo de classificação de gestos.
-- `draw.py`: Script para desenhar os pontos de referência e conexões nas imagens capturadas.
-- `creatData.py`: Código responsável por gerar os dados no arquivo .csv a partir das imagens capturadas.
-
 ## Como Executar
 
 1. Conecte uma câmera ao seu computador.
@@ -79,6 +70,14 @@ Além disso, as teclas de '0' a '9' e de 'a' a 'z' podem ser usadas para registr
 
 - **'0' a '9'**: As teclas numéricas de '0' a '9' são convertidas para os números correspondentes.
 - **'a' a 'z'**: As teclas alfabéticas de 'a' a 'z' são convertidas para os números de 10 a 35.
+
+## Estrutura do Projeto
+
+- `app.py`: Script principal responsável por executar o sistema de reconhecimento de gestos em tempo real e a gravação de dados.
+- `model/`: Diretório contendo o modelo e arquivos relacionados à classificação de gestos.
+  - `model/gesture_sign_classifier.py`: Código que executa o reconhecimento em tempo real utilizando o modelo de classificação de gestos.
+- `draw.py`: Script para desenhar os pontos de referência e conexões nas imagens capturadas.
+- `creatData.py`: Código responsável por gerar os dados no arquivo .csv a partir das imagens capturadas.
 
 ## Data_Base
 - Arquivo .csv gerado: [gesture_sign_history.csv](https://drive.google.com/file/d/1IsoZwXI1gz-sfuxFUAJP15IWeVUBybhv/view?usp=sharing) 
