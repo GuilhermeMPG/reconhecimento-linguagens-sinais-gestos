@@ -12,8 +12,8 @@ Este projeto utiliza o MediaPipe para detectar e classificar gestos das mãos em
   - Relógio (Sentido Horário)
   - Tchau (Mexer a mão aberta 2 vezes para cada lado, começando pela direita)
   - Não (Mexer a mão e o dedo 2 vezes para cada lado, começando pela direita)
-  - Oi (Sentido Horário)
-  - Tudo Bem?
+  - Oi (LIBRAS)
+  - Tudo Bem? (LIBRAS)
 
 ## Funcionalidades
 
@@ -103,8 +103,8 @@ Para unir essas ideias, criamos um array de 966 (21 vezes 46) pontos , onde cada
 - Exemplo de Estrutura
 
 Considere:
-- **Pontos da Mão**: `[[px1, px2, px3], [py1, py2, py3], [pz1, pz2, pz3], [pv1, pv2, pv3], [ps1, ps2, ps3]]`
-- **Histórico**: `[[x1, x2, x3, x4, x5], [y1, y2, y3, y4, y5], [z1, z2, z3, z4, z5]]`
+- **Pontos da Mão igual a 3**: `[[px1, px2, px3], [py1, py2, py3], [pz1, pz2, pz3], [pv1, pv2, pv3], [ps1, ps2, ps3]]`
+- **Histórico igual a 5**: `[[x1, x2, x3, x4, x5], [y1, y2, y3, y4, y5], [z1, z2, z3, z4, z5]]`
 
 Concatenamos os dois arrays de forma que a posição represente o ponto da mão corretamente:
 
@@ -158,10 +158,6 @@ Combina os resultados das funções de pré-processamento e processamento do his
 ### gravar_csv(numero, modo, lista_gestos)
 
 Grava os gestos registrados em um arquivo CSV.
-
-### registrar_gestos(numero, modo, lista_gestos)
-
-Registra os gestos em um arquivo Feather para análise posterior.
 
 ### draw_landmarks_on_image(image, landmark_list, connections, ...)
 
