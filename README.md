@@ -83,6 +83,50 @@ Além disso, as teclas de '0' a '9' e de 'a' a 'z' podem ser usadas para registr
 ## Data_Base
 - Arquivo .csv gerado: [gesture_sign_history.csv](https://drive.google.com/file/d/1IsoZwXI1gz-sfuxFUAJP15IWeVUBybhv/view?usp=sharing) 
 - Imagens Externas: https://www.kaggle.com/datasets/williansoliveira/libras
+## Método Adotado 
+### Estrutura dos Dados Gerados
+Vamos destacar como é desenvolvido os dados que serão o utilizados para gerar nosso modelo. Para isso vamos trabalhar basiciamente com esses dois conjuntos de valores:
+
+- Pontos da Mão: 21
+- Histórico: 46
+
+Para identificar gestos estático, utilizamos uma técnica lógica: selecionamos um ponto base na mão e calculamos a distância entre esse ponto e os outros. Dessa forma, obtemos um padrão de valores que identifica o gesto. Realizamos esse cálculo para os 21 pontos da mão.
+
+Então, surge a pergunta: para que serve o histórico, se apenas com esse cálculo podemos obter um padrão? A resposta é simples: isso não funciona para gestos que exigem movimento. 
+
+Para gestos em movimento, calculamos essa variação ao longo do tempo. Assim, criamos um histórico de movimento, foi definindo um histórico de 46 que nos dá tempo suficiente para registrar gestos curtos, mas efetivos. Esse valor pode ser ajustado conforme necessário.
+
+### Estrutura do Array
+
+Para unir essas ideias, criamos um array de 966 (21 vezes 46) pontos , onde cada ponto da mão possui dois valores(X e Y) para a posição e outros dois para o movimento no espaço. Assim, a base é treinada com arrays de tamanho 966 vezes 4. Quando o gesto é estático, os valores de movimento no espaço é igual a zero.
+
+- Exemplo de Estrutura
+
+Considere:
+- **Pontos da Mão**: `[[px1, px2, px3], [py1, py2, py3], [pz1, pz2, pz3], [pv1, pv2, pv3], [ps1, ps2, ps3]]`
+- **Histórico**: `[[x1, x2, x3, x4, x5], [y1, y2, y3, y4, y5], [z1, z2, z3, z4, z5]]`
+
+Concatenamos os dois arrays de forma que a posição represente o ponto da mão corretamente:
+
+- **Array Final**: 
+```
+[
+    [px1, x1], [px2, y1], [px3, z1],
+    [py1, x2], [py2, y2], [py3, z2],
+    [pz1, x3], [pz2, y3], [pz3, z3],
+    [pv1, x4], [pv2, y4], [pv3, z4],
+    [ps1, x5], [ps2, y5], [ps3, z5]
+]
+```
+
+
+Assim, obtemos um array com 30 valores, lembrando que cada valor representa X e Y. Portanto, temos 30 vezes 4, resultando em um total de 120 valores.
+
+Dado que temos 966 pontos no total, a matriz final utilizada será de 966 vezes 4, resultando em 3864 valores por linha de dados.
+
+---
+
+
   
 
 ## Funções Principais Do Main
