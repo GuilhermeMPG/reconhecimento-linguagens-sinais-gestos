@@ -203,6 +203,7 @@ Este projeto está licenciado sob a Licença MIT. Veja o arquivo `LICENSE` para 
 - Google AI. MediaPipe Solutions Guide. [Link](https://ai.google.dev/edge/mediapipe/solutions/guide?hl=pt-br)
 - TensorFlow. (2021). TensorFlow Lite: Guia de inferência. [Link](https://www.tensorflow.org/lite/guide/inference?hl=pt-br#load_and_run_a_model_in_python)
 - TensorFlow. (2021). TensorFlow Bibliography. [Link](https://www.tensorflow.org/about/bib?hl=pt-br)
+- IPnet Growth Partner. (2021). Padronização e Normalização de Dados em Machine Learning. Medium. [Link](https://medium.com/ipnet-growth-partner/padronizacao-normalizacao-dados-machine-learning-f8f29246c12)
 
 ---
 
