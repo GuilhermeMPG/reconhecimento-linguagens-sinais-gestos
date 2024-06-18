@@ -1,5 +1,3 @@
-Aqui está uma versão aprimorada do seu README:
-
 # Reconhecimento da Linguagem LIBRAS e Outros Gestos da Mão
 
 ## Descrição do Projeto
