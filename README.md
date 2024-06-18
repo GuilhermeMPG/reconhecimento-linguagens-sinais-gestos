@@ -78,7 +78,7 @@ Além disso, as teclas de '0' a '9' e de 'a' a 'z' podem ser usadas para registr
 - `creatData.py`: Código responsável por gerar os dados no arquivo .csv a partir das imagens capturadas.
 
 ## Data_Base
-- Arquivo .csv gerado: [gesture_sign_history.csv](https://drive.google.com/file/d/1IsoZwXI1gz-sfuxFUAJP15IWeVUBybhv/view?usp=sharing) 
+- Arquivo .csv gerado: [gesture_sign_history.csv](https://drive.google.com/file/d/144Ct4juy9VBNN4yT2DzGJG20vMGR42ug/view?usp=sharing) 
 - Imagens Externas: https://www.kaggle.com/datasets/williansoliveira/libras
 ## Método Adotado 
 ### Estrutura dos Dados Gerados
