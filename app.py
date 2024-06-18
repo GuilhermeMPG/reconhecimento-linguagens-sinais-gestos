@@ -66,7 +66,7 @@ def main():
         ret, imagem = captura.read()
         if not ret:
             break
-        imagem = cv.flip(imagem, 1)  # Exibir espelhado
+        # imagem = cv.flip(imagem, 1)  # Exibir espelhado
         imagem_debug = copy.deepcopy(imagem)
 
         # Implementação da detecção
@@ -395,7 +395,7 @@ def desenhar_retangulo_borda(usando_borda, imagem, borda, mao_dominante, texto_g
 
 
     # Exibe o modo atual
-    modos = ['Gestos em Movimento', 'Gestos Estáticos']
+    modos = ['Gestos em Movimento', 'Gestos Estaticos']
     if modo in [1, 2]:
         cv.putText(imagem, "MODO:" + modos[modo - 1], (10, 90),
                    cv.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1, cv.LINE_AA)
