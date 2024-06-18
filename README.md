@@ -197,6 +197,7 @@ Este projeto está licenciado sob a Licença MIT. Veja o arquivo `LICENSE` para 
 
 - MediaPipe Authors. (2020). MediaPipe Python (Version 2.0) [Source code]. GitHub. [Link](https://github.com/google-ai-edge/mediapipe/tree/master/mediapipe/python)
 - Stack Overflow. (2021). Create a rectangle around all the points returned from MediaPipe hand landmark detection. [Link](https://stackoverflow.com/questions/66876906/create-a-rectangle-around-all-the-points-returned-from-mediapipe-hand-landmark-d)
+- MediaPipe Authors. (2020). Recognition using MediaPipe (Version 2.0) [Source code]. GitHub.[Link](https://github.com/vi/hand-recognition-mediapipe?tab=readme-ov-file)
 - OpenCV Documentation. (2021). OpenCV-Python Tutorials. [Link](https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html)
 - Google AI. MediaPipe Solutions Guide. [Link](https://ai.google.dev/edge/mediapipe/solutions/guide?hl=pt-br)
 - TensorFlow. (2021). TensorFlow Lite: Guia de inferência. [Link](https://www.tensorflow.org/lite/guide/inference?hl=pt-br#load_and_run_a_model_in_python)
